@@ -10,24 +10,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  *
  * @author Advait
+ * For the validations follow 
+ * "http://docs.oracle.com/javaee/6/tutorial/doc/gircz.html"
  */
-
 @Entity
 @Table
 public class Student {
 
+    @TableGenerator(name = "Student", pkColumnName = "studentID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private int id, studentID;
+    @NotNull(message="Id must be specified.")
+    private int id; 
+    
+    @NotNull(message="Student ID must be specified.")
+    @Size(max = 7)
+    private double studentID;
+    
+    @NotNull(message="Student Name must be specified.")
+    @Size(min = 2,max = 30)
     private String sname;
+    
+    @NotNull(message="Student Email ID must be specified.")
+    @Size(min = 12,max = 35)
     private double semailID;
-    private String level;
-/*
+    /*for digits
+    @DecimalMax(value = "50000.00")
+    private int salary;
+    */
+    @NotNull(message="Student Level must be specified.")
+    @Size(max = 10)
+    private String slevel;
+
+    /*
     public Student(int id, int studentID, String sname, double semailID, String level) {
         super();
         this.id = id;
@@ -36,7 +59,7 @@ public class Student {
         this.semailID = semailID;
         this.level = level;
     }
-*/
+     */
     public int getId() {
         return id;
     }
@@ -45,11 +68,11 @@ public class Student {
         this.id = id;
     }
 
-    public int getStudentID() {
+    public double getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(double studentID) {
         this.studentID = studentID;
     }
 
@@ -70,15 +93,15 @@ public class Student {
     }
 
     public String getLevel() {
-        return level;
+        return slevel;
     }
 
     public void setLevel(String level) {
-        this.level = level;
+        this.slevel = level;
     }
 
     @Override
     public String toString() {
-      return "Student [" +id + ", Student ID =" + studentID + ", Name =" + sname + ", Email ID =" + semailID + ", Level = " + level +"]";
+        return "Student [" + id + ", Student ID =" + studentID + ", Name =" + sname + ", Email ID =" + semailID + ", Level = " + slevel + "]";
     }
 }
