@@ -28,10 +28,8 @@ public class Student {
     @TableGenerator(name = "Student", pkColumnName = "studentID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(message="Id must be specified.")
     private int id; 
     
-    @NotNull(message="Student ID must be specified.")
     @Size(max = 7)
     private double studentID;
     
@@ -46,7 +44,6 @@ public class Student {
     @DecimalMax(value = "50000.00")
     private int salary;
     */
-    @NotNull(message="Student Level must be specified.")
     @Size(max = 10)
     private String slevel;
 
